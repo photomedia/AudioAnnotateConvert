@@ -22,20 +22,31 @@ def main(argv):
 
     with open(inputfile) as f1:
         with open(outputfile, 'w') as f2:
-            f2.write("<Item xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamepaceSchemaLocation=\"avalon_structure.xsd\">\n")   
+            #f2.write("<Item xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamepaceSchemaLocation=\"avalon_structure.xsd\">\n")   
             #f2.write("<Item>\n")
             lines = f1.readlines()
+            line = lines[0]
+            next_line = lines[1]
+            if line != "\n" and next_line == "\n":
+                title=line.rstrip('\n')
+            else: #no title found
+                title="Untitled"
+            f2.write("<Item label=\""+title+"\">\n")
             for i, line in enumerate(lines):
-                pattern = '^(\d+:){0,2}\d+(\.\d+)?'
+                pattern = '^(\d+:):{0,2}\d+(\.\d+)?'
                 test_string = line
                 result = re.match(pattern, test_string)
                 if result:
-                    timecode=line.rstrip('\n') 
-                    speaker=previous_line.rstrip('\n') 
-                    label=lines[i+1].rstrip('\n') 
+                    timecode=line.rstrip('\n')
+                    speaker=previous_line.rstrip('\n')
+                    label=lines[i+1].rstrip('\n')
                     label=label.replace('"', '&quot;')
-                    f2.write("  <div label=\""+label+"\">\n    <span label=\""+speaker+"\" begin=\""+timecode+"\" />\n  </div>\n")
-
+                    lookahead = i+4
+                    if len(lines) > lookahead :
+                        endtimecode = lines[i+4].rstrip('\n')
+                    else:
+                        endtimecode = ""
+                    f2.write("  <span label=\""+speaker+" "+label+"\" begin=\""+timecode+"\" end=\""+endtimecode+"\" />\n")
                 else:
                     previous_line=line
             f2.write("</Item>")
