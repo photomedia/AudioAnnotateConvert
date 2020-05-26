@@ -46,7 +46,7 @@ def main(argv):
                         endtimecode = lines[i+4].rstrip('\n')
                     else:
                         endtimecode = ""
-                    f2.write("  <span label=\""+speaker+" "+label+"\" begin=\""+timecode+"\" end=\""+endtimecode+"\" />\n")
+                    f2.write("  <Span label=\""+speaker+" "+label+"\" begin=\""+timecode+"\" end=\""+endtimecode+"\" />\n")
                 else:
                     previous_line=line
             f2.write("</Item>")
