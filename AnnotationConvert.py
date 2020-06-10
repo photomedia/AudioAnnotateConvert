@@ -45,7 +45,7 @@ def main(argv):
                     if len(lines) > lookahead :
                         endtimecode = lines[i+4].rstrip('\n')
                     else:
-                        endtimecode = ""
+                        endtimecode = timecode
                     f2.write("  <Span label=\""+speaker+" "+label+"\" begin=\""+timecode+"\" end=\""+endtimecode+"\" />\n")
                 else:
                     previous_line=line

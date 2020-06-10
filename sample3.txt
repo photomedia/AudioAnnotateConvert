@@ -120,3 +120,6 @@ Unknown
 00:44:15.22
 Music fades in.
 
+END
+00:45:00.00
+[Cut out]

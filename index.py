@@ -90,7 +90,7 @@ def api_convert():
                 if len(lines) > lookahead :
                     endtimecode = lines[i+4].rstrip('\n')
                 else:
-                    endtimecode = ""
+                    endtimecode = timecode
                 convertedAnnotationText=convertedAnnotationText+"  <Span label=\""+speaker+" "+label+"\" begin=\""+timecode+"\" end=\""+endtimecode+"\" />\n";
             else:
                 previous_line=line
