@@ -2,7 +2,6 @@ from flask import Flask, request
 import re
 app = Flask(__name__)
 
-
 def processOneItem(ItemToProcess):
     #process one Item:
     line = ItemToProcess[0]
@@ -31,7 +30,6 @@ def processOneItem(ItemToProcess):
             previous_line=line
     convertedAnnotationText=convertedAnnotationText+"</Item>";
     return (convertedAnnotationText)
-    
 
 @app.route('/')
 def api_root():
@@ -74,20 +72,28 @@ function fetchConversion() {
     <form id =\"myform\">
     <div class=\"form-group\">
     <label for=\"annotation\">Paste SW Format Annotation:</label>
-    <textarea class=\"form-control\" id=\"annotation\" name=\"annotation\" rows=\"20\"></textarea>
+    <textarea class=\"form-control\" id=\"annotation\" name=\"annotation\" rows=\"12\"></textarea>
     <button id=\"btnSubmit\" type=\"submit\" class=\"btn btn-primary\"> <i class='far fa-arrow-alt-circle-down'></i> Convert to Avalon XML <i class='far fa-arrow-alt-circle-down'></i></button>
      </div>
      </form>
-
-     <textarea id=\"ConvertedAvalonXML\" class=\"form-control\" rows=\"20\">
+     <button id=\"copyButton\" class=\"btn btn-default\"><i class="fa fa-clone" aria-hidden="true"></i> select & copy</button>
+     <textarea id=\"ConvertedAvalonXML\" class=\"form-control\" rows=\"10\">
     """;
     output=output +"""
     </textarea>
+    <br />
+    Source Code: <a href=\"https://github.com/photomedia/AudioAnnotateConvert\">https://github.com/photomedia/AudioAnnotateConvert</a>
     <script>
     $( \"#btnSubmit\" ).click(function( event ) {
         event.preventDefault();
         fetchConversion();
     });
+
+   $(\"#copyButton\").click(function(){
+    $(\"#ConvertedAvalonXML\").select();
+    document.execCommand('copy');
+   });
+
     </script>
     </body></html>""";
     return output
@@ -101,18 +107,18 @@ def api_convert():
         convertedAnnotationText = "";
 
         lines = annotationText.splitlines();
-        
+
         special_line_indexes = []
-        for i, line in enumerate(lines): 
+        for i, line in enumerate(lines):
             if ('END' == line):
                 #extract line index for lines that contain END
                 special_line_indexes.append(i + 1)
-        length = len(special_line_indexes) 
+        length = len(special_line_indexes)
         #check if multiple files included
         if length>1:
             startIndex = 0
             convertedAnnotationText=convertedAnnotationText+"<Items>"
-            for i in range(length): 
+            for i in range(length):
                 endIndex = special_line_indexes[i]+2
                 #print (str(startIndex)+' '+str(endIndex))
                 ItemToProcess=lines[startIndex:endIndex]
