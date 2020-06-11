@@ -36,7 +36,7 @@ def api_root():
     output = """<html>
     <title>SpokenWeb: Convert SW Annotation to Avalon XML</title>
     <meta charset=\"utf-8\">
-    <meta name=\"viewport" content="width=device-width, initial-scale=1\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
     <head>
     <script src=\"https://kit.fontawesome.com/a076d05399.js\"></script>
     <script src=\"https://code.jquery.com/jquery-3.3.1.min.js\" crossorigin=\"anonymous\"></script>
