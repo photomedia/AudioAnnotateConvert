@@ -27,7 +27,7 @@ def processOneItem(ItemToProcess, f2):
                 endtimecode = ItemToProcess[i+4].rstrip('\n')
             else:
                 endtimecode = timecode
-            f2.write("  <Span label=\""+speaker+" "+label+"\" begin=\""+timecode+"\" end=\""+endtimecode+"\" />\n")
+            f2.write("  <Span label=\""+speaker+". "+label+"\" begin=\""+timecode+"\" end=\""+endtimecode+"\" />\n")
         else:
             previous_line=line
     f2.write("</Item>")
