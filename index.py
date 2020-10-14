@@ -35,8 +35,11 @@ def processOneItem(ItemToProcess):
         if result:
             timecode=line.rstrip('\n')
             speaker=previous_line.rstrip('\n')
-            label=ItemToProcess[i+1].rstrip('\n')
-            label=label.replace('"', '&quot;')
+            if (len(ItemToProcess) > (i+1)):
+                label=ItemToProcess[i+1].rstrip('\n')
+                label=label.replace('"', '&quot;')
+            else:
+                label="";
             lookahead = i+4
             if len(ItemToProcess) > lookahead :
                 endtimecode = ItemToProcess[i+4].rstrip('\n')

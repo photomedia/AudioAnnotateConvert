@@ -15,7 +15,7 @@ def processOneItemXML(Item, f2):
         annotation = label.split('.', 1)[1]
         begin = Span.get('begin')
         line_to_write = speaker+'\n'+begin+'\n'+annotation.lstrip()+'\n\n'
-        f2.write(line_to_write)
+        f2.write(line_to_write.encode('utf-8'))
 
 def processOneItem(ItemToProcess, f2):
     #process one Item:
@@ -33,8 +33,11 @@ def processOneItem(ItemToProcess, f2):
         if result:
             timecode=line.rstrip('\n')
             speaker=previous_line.rstrip('\n')
-            label=ItemToProcess[i+1].rstrip('\n')
-            label=label.replace('"', '&quot;')
+            if (len(ItemToProcess) > (i+1)):
+                label=ItemToProcess[i+1].rstrip('\n')
+                label=label.replace('"', '&quot;')
+            else:
+                label="";
             lookahead = i+4
             if len(ItemToProcess) > lookahead :
                 endtimecode = ItemToProcess[i+4].rstrip('\n')
