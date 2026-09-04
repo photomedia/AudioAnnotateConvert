@@ -38,11 +38,6 @@ Use the follwoing command line to run a reverse conversion of Avalon XML formatt
 
 <code>python AnnotationConvert.py -r -i input.xml -o output.txt</code>
 
-### Online
-
-The script is also available as a Flask web application here: https://photomedia.pythonanywhere.com/
-You can just paste in your SpokenWeb Text annotations and have the Avalon XML result from the online form.
-You can also paste in Avalon XML and convert it to SpokenWeb Text.
 
 ##  Requirements
 
